@@ -1,6 +1,6 @@
 <?php
 
-namespace Incapption\LoadBalancedCronTask\Tests;
+namespace Incapption\Shopify2GoogleShopping\Tests;
 
 use Incapption\Shopify2GoogleShopping\Shopify2GoogleShopping;
 use PHPUnit\Framework\TestCase;
