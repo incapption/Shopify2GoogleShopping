@@ -1,0 +1,32 @@
+{
+  "name": "incapption/shopify2googleshopping",
+  "description": "Create a valid xml file for google shopping based on your shopify aritcles",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "incapption",
+      "email": "tastenhelden@gmail.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/incapption/Shopify2GoogleShopping"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Incapption\\Shopify2GoogleShopping\\": "src/",
+      "Incapption\\Shopify2GoogleShopping\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}
