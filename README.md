@@ -1,5 +1,5 @@
 # Shopify2GoogleShopping
-This is a package to quickly create an XML file for Google Shopping from Shopify products.
+This is a package to quickly create a XML file for Google Shopping from Shopify products.
 
 ### Installation
 ```bash
@@ -61,9 +61,9 @@ The template looks like this. You can either use the existing template or create
                 <g:link>{{ project.link }}/products/{{ item.handle }}</g:link>
                 <g:price>{{ item.variants[0].price | decimals: 2, "en-US" | append: " EUR" }}</g:price>
                 <g:availability>in stock</g:availability>
-                <g:gtin>{{ item.custom.gtin }}</g:gtin>
-                <g:brand>{{ item.custom.brand }}</g:brand>
-                <g:g:product_type>{{ item.custom.product_type }}</g:g:product_type>
+                <g:gtin>{{ item.metafield.custom.gtin }}</g:gtin>
+                <g:brand>{{ item.metafield.custom.brand }}</g:brand>
+                <g:g:product_type>{{ item.metafield.custom.product_type }}</g:g:product_type>
                 <g:adult>no</g:adult>
                 <g:shipping>
                     <g:country>Germany</g:country>
