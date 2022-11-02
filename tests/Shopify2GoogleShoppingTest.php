@@ -40,5 +40,7 @@ class Shopify2GoogleShoppingTest extends TestCase
         $client->setProjectLink('https://myshop.shopify.com');
 
         file_put_contents($this->testFilePath, $client->generate());
+
+        $this->assertFileExists($this->testFilePath, "test.xml created");
     }
 }

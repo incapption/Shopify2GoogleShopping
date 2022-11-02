@@ -6,26 +6,28 @@
         <link>{{ project.link }}</link>
 
         {% for item in items %}
-            <item>
-                <g:title>{{ item.title }}</g:title>
-                <g:condition>new</g:condition>
-                <g:description>{{ item.body_html | strip_html | strip_newlines }}</g:description>
-                <g:id>{{ item.id }}</g:id>
-                <g:google_product_category>{{ item.metafield.custom.google_product_category }}</g:google_product_category>
-                <g:image_link>{{ item.image.src }}</g:image_link>
-                <g:link>{{ project.link }}/products/{{ item.handle }}</g:link>
-                <g:price>{{ item.variants[0].price | decimals: 2, "en-US" | append: " EUR" }}</g:price>
-                <g:availability>in stock</g:availability>
-                <g:gtin>{{ item.metafield.custom.gtin }}</g:gtin>
-                <g:brand>{{ item.metafield.custom.brand }}</g:brand>
-                <g:g:product_type>{{ item.metafield.custom.product_type }}</g:g:product_type>
-                <g:adult>no</g:adult>
-                <g:shipping>
-                    <g:country>Germany</g:country>
-                    <g:service>Download</g:service>
-                    <g:price>{{ '0.00' | decimals: 2, "en-US" | append: " EUR" }}</g:price>
-                </g:shipping>
-            </item>
+            {%- if item.variants[0].barcode != "" -%}
+                <item>
+                    <g:title>{{ item.title }}</g:title>
+                    <g:condition>new</g:condition>
+                    <g:description>{{ item.body_html | strip_html | strip_newlines }}</g:description>
+                    <g:id>{{ item.id }}</g:id>
+                    <g:google_product_category>{{ item.metafield.custom.google_product_category }}</g:google_product_category>
+                    <g:image_link>{{ item.image.src }}</g:image_link>
+                    <g:link>{{ project.link }}/products/{{ item.handle }}</g:link>
+                    <g:price>{{ item.variants[0].price | decimals: 2, "en-US" | append: " EUR" }}</g:price>
+                    <g:availability>in stock</g:availability>
+                    <g:gtin>{{ item.variants[0].barcode }}</g:gtin>
+                    <g:brand>{{ item.metafield.custom.brand }}</g:brand>
+                    <g:g:product_type>{{ item.metafield.custom.product_type }}</g:g:product_type>
+                    <g:adult>no</g:adult>
+                    <g:shipping>
+                        <g:country>Germany</g:country>
+                        <g:service>Download</g:service>
+                        <g:price>{{ '0.00' | decimals: 2, "en-US" | append: " EUR" }}</g:price>
+                    </g:shipping>
+                </item>
+            {%- endif -%}
         {% endfor %}
 
     </channel>
