@@ -23,9 +23,16 @@ class Shopify2GoogleShopping {
      */
     private $templatePath;
 
+    /**
+     *
+     * @var int
+     */
+    private int $rateLimiter;
+
     public function __construct()
     {
-        $this->templatePath = dirname(__FILE__).'/Templates/template.liquid';
+        $this->setTemplate(dirname(__FILE__).'/Templates/template.liquid');
+        $this->setRateLimiter(1);
     }
 
     /**
@@ -102,6 +109,17 @@ class Shopify2GoogleShopping {
     }
 
     /**
+     * Sets a simple rate limiter for the api
+     *
+     * @param  int  $requestPerSecond
+     * @return void
+     */
+    public function setRateLimiter(int $requestPerSecond = 1)
+    {
+        $this->rateLimiter = $requestPerSecond;
+    }
+
+    /**
      * Generates the xml file for google shopping
      *
      * @return string
@@ -130,16 +148,25 @@ class Shopify2GoogleShopping {
         ]);
     }
 
-    private function getProducts()
+    /**
+     * @return array
+     */
+    private function getProducts() : array
     {
         $shopifyHandler = new ShopifyHandler($this->shopifyCredentials['apiKey'], $this->shopifyCredentials['password'], $this->shopifyCredentials['access_token'], $this->shopifyCredentials['host']);
         $products = $shopifyHandler->get('/admin/api/2022-10/products.json', [])['products'];
 
         foreach ($products as &$product)
         {
+            usleep((1000000 / $this->rateLimiter));
             $product += $shopifyHandler->get('/admin/api/2022-10/products/'.$product['id'].'/metafields.json', []);
         }
 
-        return $products;
+        if(!empty($products))
+        {
+            return $products;
+        }
+
+        return [];
     }
 }
