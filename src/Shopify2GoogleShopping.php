@@ -27,7 +27,7 @@ class Shopify2GoogleShopping {
      *
      * @var int
      */
-    private int $rateLimiter;
+    private $rateLimiter;
 
     public function __construct()
     {
